@@ -1,28 +1,19 @@
-#/bin/bash
-yum install epel-release -y
-yum install wget git -y
-sudo wget --no-check-certificate -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
-sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
-yum install java-11-openjdk-devel -y
-yum install jenkins -y
-systemctl daemon-reload
-service jenkins start
-
-###instalacao do docker e docker compose
-sudo yum install -y yum-utils
-sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
-sudo yum install docker-ce docker-ce-cli  containerd.io -y
-sudo systemctl start docker
-sudo systemctl enable docker
-sudo curl -L "https://github.com/docker/compose/releases/download/1.25.5/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-sudo chmod +x /usr/local/bin/docker-compose
-sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
-systemctl daemon-reload
-systemctl restart docker
-usermod -aG docker jenkins
+#!/usr/bin/env bash
+sudo yum update -y
+sudo yum install -y wget
+sudo wget -O /etc/yum.repos.d/jenkins.repo \
+    https://pkg.jenkins.io/redhat-stable/jenkins.repo
+sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
+sudo yum upgrade
+# Add required dependencies for the jenkins package
+sudo yum install -y java-11-openjdk-devel
+sudo yum install -y jenkins
+sudo systemctl daemon-reload
+sudo systemctl start jenkins
 
 #instalacao do sonar scanner
-yum install wget unzip -y
+echo "Installing Sonar Scanner..."
+sudo yum install unzip -y
 wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.2.2472-linux.zip
 unzip sonar-scanner-cli-4.6.2.2472-linux.zip -d /opt/
 mv /opt/sonar-scanner-4.6.2.2472-linux /opt/sonar-scanner

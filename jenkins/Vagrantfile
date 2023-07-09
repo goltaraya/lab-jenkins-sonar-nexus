@@ -1,5 +1,6 @@
 Vagrant.configure("2") do |jenkins|
     jenkins.vm.box = "centos/7"
+
     jenkins.vm.hostname = "jenkins"
 
     jenkins.vm.network "forwarded_port", guest: 80, host: 8080, hostip: "127.0.0.1"
