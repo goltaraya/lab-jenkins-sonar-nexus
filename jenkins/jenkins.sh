@@ -8,8 +8,15 @@ sudo yum upgrade
 # Add required dependencies for the jenkins package
 sudo yum install -y java-11-openjdk-devel
 sudo yum install -y jenkins
+
+curl -fsSL https://get.docker.com/ | sh
+sudo systemctl start docker
+sudo systemctl enable docker
+sudo usermod -aG docker jenkins
+
 sudo systemctl daemon-reload
 sudo systemctl start jenkins
+sudo systemctl enable jenkins
 
 #instalacao do sonar scanner
 echo "Installing Sonar Scanner..."

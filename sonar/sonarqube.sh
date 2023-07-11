@@ -29,7 +29,8 @@ WantedBy=multi-user.target
 EOT
 
 # Starting Sonar Service
-service sonar start
+sudo systemctl start sonar.service
+sudo systemctl enable sonar.service
 
 # Installing Sonar Scanner
 wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.8.0.2856-linux.zip
