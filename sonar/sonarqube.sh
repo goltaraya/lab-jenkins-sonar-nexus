@@ -1,8 +1,8 @@
 #/usr/bin/bash
 useradd sonar
 
-#Installing Java 11, wget, unzip
-yum install wget unzip java-11-openjdk-devel -y
+#Installing Java 11, git, wget, unzip
+yum install wget git unzip java-11-openjdk-devel -y
 
 # Downloading Sonarqube and installing it
 wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-9.1.0.47736.zip
