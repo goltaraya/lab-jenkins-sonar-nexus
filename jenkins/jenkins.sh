@@ -27,3 +27,6 @@ chown -R jenkins:jenkins /opt/sonar-scanner
 echo 'export PATH=$PATH:/opt/sonar-scanner/bin' | sudo tee -a /etc/profile
 curl -sL https://rpm.nodesource.com/setup_10.x | sudo bash -
 sudo yum install nodejs -y
+
+sudo docker volume create --name snexus-data
+sudo docker -d -p 8091:8081 -p 8123:8123 --name nexus --volume nexus-data sonatype/nexus3
