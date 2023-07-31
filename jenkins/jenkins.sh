@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # updating os packages
 sudo yum update -y
+sudo yum install wget -y
 
 # setting up jenkins repository
 sudo wget -O /etc/yum.repos.d/jenkins.repo \
@@ -37,5 +38,5 @@ curl -sL https://rpm.nodesource.com/setup_10.x | sudo bash -
 sudo yum install nodejs -y
 
 # creating docker volume to nexus and setting nexus container up
-sudo docker volume create --name snexus-data
-sudo docker -d -p 8091:8081 -p 8123:8123 --name nexus --volume nexus-data sonatype/nexus3
+sudo docker volume create --name nexus-data
+sudo docker run -d -p 8091:8081 -p 8123:8123 --name nexus --volume nexus-data sonatype/nexus3
